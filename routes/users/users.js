@@ -61,7 +61,7 @@ usersRouter.post("/register", (req, res) => {
 });
 
 // Login existing users --> /users/login
-usersRouter.post("/login", restricted, (req, res) => {
+usersRouter.post("/login", (req, res) => {
   let { email, password } = req.body;
 
   db.findUserByEmail(email)
