@@ -16,6 +16,21 @@ usersRouter.get("/", async (req, res) => {
   }
 });
 
+// Get users with restaurants --> /users-data
+usersRouter.get("/:id-data", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await db.getUsersRestaurants(id);
+    user.id
+      ? res.status(200).json(user)
+      : res.status(404).json({ message: "Could not find user by that ID" });
+    console.log(user);
+  } catch (error) {
+    res.status(500).json({ message: "Ran into an error retrieving data" });
+    console.log(error);
+  }
+});
+
 // Register for new users  --> /users/register
 usersRouter.post("/register", (req, res) => {
   const user = req.body;
@@ -61,7 +76,7 @@ usersRouter.post("/register", (req, res) => {
 });
 
 // Login existing users --> /users/login
-usersRouter.post("/login", restricted, (req, res) => {
+usersRouter.post("/login", (req, res) => {
   let { email, password } = req.body;
 
   db.findUserByEmail(email)
