@@ -36,6 +36,23 @@ const updateUser = user => {
     .update(user);
 };
 
+function getUsersRestaurants(id) {
+  const user = db("users")
+    .where({ id })
+    .first();
+
+  const restaurant = db("user_restaurants")
+    .join("users", "user_restaurants.user_id", "users.id")
+    .join("restaurants", "user_restaurants.restaurant_id", "restaurants.id")
+    .select("restaurants.*")
+    .where("users.id", "=", id);
+
+  return Promise.all([user, restaurant]).then(list => {
+    const [user, restaurant] = list;
+    return { ...user, restaurant };
+  });
+}
+
 module.exports = {
   addUser,
   findUser,
@@ -43,5 +60,6 @@ module.exports = {
   findUserById,
   updateUser,
   findUserByEmail,
-  getUsers
+  getUsers,
+  getUsersRestaurants
 };
