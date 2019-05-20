@@ -47,7 +47,7 @@ usersRouter.post("/register", (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      if (err.message.includes("duplicate key value")) {
+      if (err.message.includes("users.email")) {
         return res.status(400).json({
           message:
             "Email is already taken, please try using another email address",
@@ -61,7 +61,7 @@ usersRouter.post("/register", (req, res) => {
 });
 
 // Login existing users --> /users/login
-usersRouter.post("/login", (req, res) => {
+usersRouter.post("/login", restricted, (req, res) => {
   let { email, password } = req.body;
 
   db.findUserByEmail(email)
