@@ -4,7 +4,7 @@ const moment = require("moment");
 
 const getUsers = () => {
   let users = [];
-  let amountOfUsers = 30;
+  let amountOfUsers = 10;
   const password = bcrypt.hashSync("password", 12);
   for (let i = 0; i < amountOfUsers; i++) {
     let user = {
@@ -23,9 +23,8 @@ const getUsers = () => {
 };
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
   return knex("users")
-    .del()
+    .truncate()
     .then(function() {
       // Inserts seed entries
       return knex("users").insert(getUsers());
