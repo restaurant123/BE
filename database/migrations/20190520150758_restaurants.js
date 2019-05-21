@@ -7,7 +7,7 @@ exports.up = function(knex) {
       .notNullable();
     tbl.string("address", 255).notNullable();
     tbl.string("image_url", 255);
-    tbl.string("description", 255);
+    tbl.string("description");
     tbl.string("city", 255).notNullable();
     tbl.string("state", 255).notNullable();
     tbl.integer("zipCode").notNullable();
