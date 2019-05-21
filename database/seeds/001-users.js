@@ -4,13 +4,12 @@ const moment = require("moment");
 
 const getUsers = () => {
   let users = [];
-  let amountOfUsers = 10;
-  const password = bcrypt.hashSync("password", 12);
+  let amountOfUsers = 5;
   for (let i = 0; i < amountOfUsers; i++) {
     let user = {
       name: faker.name.findName(),
       email: faker.internet.email(),
-      password: password,
+      password: "password",
       address: faker.address.streetAddress(),
       city: "Manhattan",
       state: "New York",
@@ -24,7 +23,7 @@ const getUsers = () => {
 
 exports.seed = function(knex) {
   return knex("users")
-    .truncate()
+    .del()
     .then(function() {
       // Inserts seed entries
       return knex("users").insert(getUsers());

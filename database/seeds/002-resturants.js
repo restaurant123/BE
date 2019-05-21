@@ -2,7 +2,7 @@ const faker = require("faker");
 
 const getRestaurants = () => {
   let restaurants = [];
-  let amountOfRestaurants = 20;
+  let amountOfRestaurants = 15;
   for (let i = 0; i < amountOfRestaurants; i++) {
     let restaurant = {
       name: faker.company.companyName(),
@@ -20,7 +20,7 @@ const getRestaurants = () => {
 
 exports.seed = function(knex) {
   return knex("restaurants")
-    .truncate()
+    .del()
     .then(function() {
       // Inserts seed entries
       return knex("restaurants").insert(getRestaurants());

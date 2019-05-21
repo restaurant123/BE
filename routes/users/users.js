@@ -17,7 +17,7 @@ usersRouter.get("/", async (req, res) => {
 });
 
 // Get users with restaurants --> /users-data
-usersRouter.get("/:id-data", async (req, res) => {
+usersRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const user = await db.getUsersRestaurants(id);
@@ -112,6 +112,26 @@ usersRouter.post("/login", (req, res) => {
         status: err.status || 500
       });
     });
+});
+
+// Put request to edit user --> /:id
+usersRouter.put("/:id", restricted, async (req, res) => {
+  const user = req.body;
+  try {
+    const { id } = req.params;
+    const editUser = await db.updateUser(id, user);
+    editUser
+      ? res.status(200).json(editUser)
+      : res.status(404).json({
+          message: "The user with the specified ID does not exist."
+        });
+  } catch (error) {
+    // log error to database
+    console.log(error);
+    res.status(500).json({
+      message: "The user information could not be modified."
+    });
+  }
 });
 
 module.exports = usersRouter;
