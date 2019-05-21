@@ -11,6 +11,7 @@ exports.up = function(knex) {
     tbl.string("city", 255).notNullable();
     tbl.string("state", 255).notNullable();
     tbl.integer("zipCode").notNullable();
+    tbl.integer("visited").defaultTo(0);
   });
 };
 

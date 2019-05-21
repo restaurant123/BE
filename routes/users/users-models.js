@@ -30,27 +30,41 @@ const findUserByEmail = email => {
     .first();
 };
 
-const updateUser = user => {
-  return db("users")
-    .where({ id: user.id })
-    .update(user);
-};
-
 function getUsersRestaurants(id) {
   const user = db("users")
     .where({ id })
     .first();
 
-  const restaurant = db("user_restaurants")
-    .join("users", "user_restaurants.user_id", "users.id")
-    .join("restaurants", "user_restaurants.restaurant_id", "restaurants.id")
-    .select("restaurants.*")
+  const restaurants = db("restaurants")
+    .join("users", "users.id", "users.id")
+    .select(
+      "restaurants.id as restaurant_id",
+      "restaurants.name",
+      "restaurants.address",
+      "restaurants.city",
+      "restaurants.state",
+      "restaurants.zipCode",
+      "restaurants.visited"
+    )
     .where("users.id", "=", id);
 
-  return Promise.all([user, restaurant]).then(list => {
-    const [user, restaurant] = list;
-    return { ...user, restaurant };
+  return Promise.all([user, restaurants]).then(list => {
+    const [user, restaurants] = list;
+    return { ...user, restaurants };
   });
+}
+
+function updateUser(id, changes) {
+  return db("users")
+    .where({ id })
+    .update(changes)
+    .then(count => {
+      if (count > 0) {
+        return findUserById(id);
+      } else {
+        return null;
+      }
+    });
 }
 
 module.exports = {
