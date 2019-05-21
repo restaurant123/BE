@@ -38,6 +38,15 @@ function getUsersRestaurants(id) {
   const restaurants = db("restaurants")
     .join("users", "users.id", "users.id")
     .select(
+      "users.id ",
+      "users.name",
+      "users.email",
+      "users.address",
+      "users.city",
+      "users.state",
+      "users.zipCode"
+    )
+    .select(
       "restaurants.id as restaurant_id",
       "restaurants.name",
       "restaurants.address",
