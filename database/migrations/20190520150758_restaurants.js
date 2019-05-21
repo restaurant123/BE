@@ -2,14 +2,14 @@ exports.up = function(knex) {
   return knex.schema.createTable("restaurants", tbl => {
     tbl.increments();
     tbl
-      .string("name", 255)
+      .text("name")
       .unique()
       .notNullable();
-    tbl.string("address", 255).notNullable();
-    tbl.string("image_url", 255);
-    tbl.string("description");
-    tbl.string("city", 255).notNullable();
-    tbl.string("state", 255).notNullable();
+    tbl.text("address").notNullable();
+    tbl.text("image_url");
+    tbl.text("description");
+    tbl.text("city").notNullable();
+    tbl.text("state").notNullable();
     tbl.integer("zipCode").notNullable();
     tbl.integer("visited").defaultTo(0);
   });
