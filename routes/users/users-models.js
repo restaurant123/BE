@@ -33,10 +33,6 @@ const findUserByEmail = email => {
 function getUsersRestaurants(id) {
   const user = db("users")
     .where({ id })
-    .first();
-
-  const restaurants = db("restaurants")
-    .join("users", "users.id", "users.id")
     .select(
       "users.id ",
       "users.name",
@@ -46,8 +42,12 @@ function getUsersRestaurants(id) {
       "users.state",
       "users.zipCode"
     )
+    .first();
+
+  const restaurants = db("restaurants")
+    .join("users", "users.id", "users.id")
     .select(
-      "restaurants.id as restaurant_id",
+      "restaurants.id",
       "restaurants.name",
       "restaurants.address",
       "restaurants.city",

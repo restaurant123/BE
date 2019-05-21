@@ -53,4 +53,20 @@ describe("restaurant router tests", () => {
         });
     });
   });
+
+  describe("Delete /", () => {
+    it("should return 204 No Content, when deleting data", async () => {
+      let res = await request(server)
+        .delete("/restaurants/3")
+        .set("Authorization", `${token}`);
+      expect(res.status).toBe(204);
+    });
+
+    it("should return 404 if it does not exist, when deleting data", async () => {
+      let res = await request(server)
+        .delete("/restaurants/190")
+        .set("Authorization", `${token}`);
+      expect(res.status).toBe(404);
+    });
+  });
 });

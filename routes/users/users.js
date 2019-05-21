@@ -80,7 +80,7 @@ usersRouter.get("/:id", restricted, async (req, res) => {
     user.id
       ? res.status(200).json(user)
       : res.status(404).json({ message: "Could not find user by that ID" });
-    // console.log(user);
+    console.log(user);
   } catch (error) {
     res.status(500).json({ message: "Ran into an error retrieving data" });
     console.log(error);
