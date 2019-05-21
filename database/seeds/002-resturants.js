@@ -4,10 +4,11 @@ const getRestaurants = () => {
   let restaurants = [];
   let amountOfRestaurants = 15;
   for (let i = 0; i < amountOfRestaurants; i++) {
+    let image = `http://lorempixel.com/640/${i + 400}/food/`;
     let restaurant = {
       name: faker.company.companyName(),
       address: faker.address.streetAddress(),
-      image_url: faker.image.food(),
+      image_url: image,
       description: faker.lorem.paragraph(),
       city: "Manhattan",
       state: "New York",
