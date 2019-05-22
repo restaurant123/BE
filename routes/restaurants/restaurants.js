@@ -2,54 +2,6 @@ const restaurantsRouter = require("express").Router();
 const db = require("./restaurants-models.js");
 const restricted = require("../../api/restricted");
 
-/**
- * @api {get} /restaurants       Get all active restaurants.
- * @apiVersion 1.0.0
- * @apiName GetAllRestaurants
- * @apiGroup Restaurants
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.get('/restaurants');
- *
- *
- * @apiUse Error
- *
- * @apiSuccessExample Restaurant Data
- *
- [
-  {
-    "id": 1,
-    "name": "Schmidt, Kirlin and Ledner",
-    "address": "315 Keeling Brooks",
-    "image_url": "http://lorempixel.com/640/480/food",
-    "description": "Pariatur sunt voluptatem. Et architecto eos. Qui nulla perspiciatis dignissimos incidunt.",
-    "city": "Manhattan",
-    "state": "New York",
-    "zipCode": 14025,
-    "visited": 0
-  },
-  {
-    "id": 2,
-    "name": "Hilpert, Rolfson and Klein",
-    "address": "671 Labadie Radial",
-    "image_url": "http://lorempixel.com/640/480/food",
-    "description": "Est modi rerum. Ea eum vel. Maxime velit est iure autem enim est veritatis dolor.",
-    "city": "Manhattan",
-    "state": "New York",
-    "zipCode": 14025,
-    "visited": 0
-  },
- *
- */
-
 // Get all restaurants in the city --> /restaurants
 restaurantsRouter.get("/", restricted, async (req, res) => {
   try {
@@ -61,44 +13,6 @@ restaurantsRouter.get("/", restricted, async (req, res) => {
       .json({ message: "We ran into an error retrieving the restaurants" });
   }
 });
-
-/**
- * @api {get} /restaurants       Get restaurant by id.
- * @apiVersion 1.0.0
- * @apiName GetRestaurantByID
- * @apiGroup Restaurants
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.get('/restaurants/1');
- *
- * @apiParam {Number} id    Restaurant id.
-
- * @apiUse Error
- *
- * @apiSuccessExample Restaurant Data
- *
- [
-  {
-    "id": 1,
-    "name": "Schmidt, Kirlin and Ledner",
-    "address": "315 Keeling Brooks",
-    "image_url": "http://lorempixel.com/640/480/food",
-    "description": "Pariatur sunt voluptatem. Et architecto eos. Qui nulla perspiciatis dignissimos incidunt.",
-    "city": "Manhattan",
-    "state": "New York",
-    "zipCode": 14025,
-    "visited": 0
-  }
- *
- */
 
 // Get restaurant by id --> /restaurants/:id
 restaurantsRouter.get("/:id", async (req, res) => {

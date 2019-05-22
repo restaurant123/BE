@@ -16,61 +16,6 @@ usersRouter.get("/", async (req, res) => {
   }
 });
 
-/**
- * @api {get} /users/:id        Get a user by the id with current active restaurants.
- * @apiVersion 1.0.0
- * @apiName GetUserWithRestaurants
- * @apiGroup Users
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.get('/users/1');
- *
- * @apiParam {Number} id    User id.
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-  "id": 1,
-  "created_at": "2019-05-20T04:20:43.000Z",
-  "updated_at": "2019-05-21T02:35:03.374Z",
-  "name": "Fancy Schaden",
-  "email": "Ashtyn7@yahoo.com",
-  "address": "99550 Marquardt Hill",
-  "city": "Manhattan",
-  "state": "New York",
-  "zipCode": 14025,
-  "restaurants": [
-    {
-      "restaurant_id": 1,
-      "name": "Bartoletti and Sons",
-      "address": "106 Jean Unions",
-      "city": "Manhattan",
-      "state": "New York",
-      "zipCode": 14025,
-      "visited": 0
-    },
-    {
-      "restaurant_id": 2,
-      "name": "Kohler - Kautzer",
-      "address": "89359 Parker Mill",
-      "city": "Manhattan",
-      "state": "New York",
-      "zipCode": 14025,
-      "visited": 0
-    },
-    {
- *
- */
 
 // Get users with restaurants --> /users/:id
 usersRouter.get("/:id", restricted, async (req, res) => {
@@ -87,52 +32,6 @@ usersRouter.get("/:id", restricted, async (req, res) => {
   }
 });
 
-/**
- * @api {post} /users/register       User Register
- * @apiVersion 1.0.0
- * @apiName UserRegister
- * @apiGroup Users
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.post('/users/register');
- *
- *  @apiParam {String} name     Mandatory First and Last Name.
- *  @apiParam {String} email     Mandatory Email Address.
- *  @apiParam {String} password     Mandatory password.
- *  @apiParam {String} city     Mandatory city name, default Manhattan.
- *  @apiParam {String} state     Mandatory state name, default New York.
- *  @apiParam {Number} zipCode     Mandatory zipCode, default 14025.
-
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-  "user": {
-    "id": 15,
-    "created_at": "2019-05-21T13:03:23.757Z",
-    "updated_at": "2019-05-21T13:03:23.757Z",
-    "name": "George Doe",
-    "email": "george_doe@gmail.com",
-    "password": "$2b$10$f3s72tsaTIkhbVh2IleeyOWCGRRlQVWWGaVfAAZQhur2lNCjx0fZG",
-    "address": "1234 Street",
-    "city": "Manhattan",
-    "state": "New York",
-    "zipCode": 14025
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImNyZWF0ZWRfYXQiOiIyMDE5LTA1LTIxVDEzOjAzOjIzLjc1N1oiLCJ1cGRhdGVkX2F0Ijoi"
-}
- *
- */
 
 // Register for new users  --> /users/register
 usersRouter.post("/register", (req, res) => {
@@ -177,41 +76,6 @@ usersRouter.post("/register", (req, res) => {
         .json({ message: err.message, status: err.status || 500 });
     });
 });
-
-/**
- * @api {post} /users/login       User login
- * @apiVersion 1.0.0
- * @apiName PostUserLogin
- * @apiGroup Users
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.post('/users/login');
- *
- *  @apiParam {String} email     Mandatory Email Address.
- *  @apiParam {String} password     Mandatory password.
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-  "message": "Welcome Ray Doe!",
-  "email": "ray_doe@gmail.com",
-  "name": "Ray Doe",
-  "id": 14,
-  "status": 200,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImNyZWF0ZWRfYXQiOiIyMDE5LTA1LTIxVDAyOjU5OjAwLjY2NFoiLCJ1cGRh"
-}
- *
- */
 
 // Login existing users --> /users/login
 usersRouter.post("/login", (req, res) => {
