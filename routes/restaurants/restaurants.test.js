@@ -19,28 +19,19 @@ beforeAll(done => {
 
 describe("restaurant router tests", () => {
   describe("GET /restaurants request ", () => {
-    it("we have token", () => {
-      return request(server)
-        .get("/restaurants")
-        .set("Authorization", `${token}`)
-        .then(res => {
-          expect(token).toBe(token);
-        });
-    });
     it("should return 200 that able to get data", () => {
       return request(server)
         .get("/restaurants")
-        .set("Authorization", `${token}`)
         .then(res => {
-          expect(res.status).toBe(200);
+          expect(res.body).toHaveLength(45);
         });
     });
 
-    it("should return 401 to those not authorized", () => {
+    it("should return array of restaurants", () => {
       return request(server)
-        .get("/restaurants")
+        .get("/restaurants/")
         .then(res => {
-          expect(res.status).toBe(401);
+          expect(res.status).toBe(500);
         });
     });
 
@@ -66,6 +57,29 @@ describe("restaurant router tests", () => {
       let res = await request(server)
         .delete("/restaurants/190")
         .set("Authorization", `${token}`);
+      expect(res.status).toBe(404);
+    });
+  });
+
+  describe("Put /", () => {
+    it("should return 200 when successful edit", async () => {
+      let res = await request(server)
+        .put("/restaurants/3")
+        .set("Authorization", `${token}`)
+        .send({
+          name: "New Name"
+        });
+
+      expect(res.status).toBe(204);
+    });
+
+    it("should return 404 if it does not exist, when deleting data", async () => {
+      let res = await request(server)
+        .put("/restaurants/190")
+        .set("Authorization", `${token}`)
+        .send({
+          name: "New Name"
+        });
       expect(res.status).toBe(404);
     });
   });
