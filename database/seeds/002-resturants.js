@@ -2,7 +2,7 @@ const faker = require("faker");
 
 const getRestaurants = () => {
   let restaurants = [];
-  let amountOfRestaurants = 15;
+  let amountOfRestaurants = 45;
   for (let i = 0; i < amountOfRestaurants; i++) {
     let image = `http://lorempixel.com/640/${i + 400}/food/`;
     let restaurant = {

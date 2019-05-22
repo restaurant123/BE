@@ -4,7 +4,7 @@ Api for Restaurant Passport. A web application for finding the best places to ea
 
 - [Users](#users) - [Get a user with the id.](#get-a-user-with-the-id.) - [Get all active restaurants for a user.](#get-all-active-restaurants-for-a-user.) - [Log a user in.](#log-a-user-in.) - [Register a new user.](#register-a-new-user.) - [Update user info.](#update-user-info.)
 
-- [Restaurants](#restaurants) - [Get a restaurant by id.](#get-a-restaurant-by-id.) - [Get all restaurants.](#get-all-restaurants.) - [Delete restaurant.](#delete-restaurant.)
+- [Restaurants](#restaurants) - [Get a restaurant by id.](#get-a-restaurant-by-id.) - [Get all restaurants.](#get-all-restaurants.) - [Edit restaurant.](#edit-restaurant.)- [Delete restaurant.](#delete-restaurant.)
 
 # Users
 
@@ -432,9 +432,79 @@ ERROR XXX
 }
 ```
 
+## Edit restaurant.
+
+    PUT /restaurants/:id
+
+### Headers
+
+| Name          | Type   | Description             |
+| ------------- | ------ | ----------------------- |
+| authorization | String | <p>User auth token.</p> |
+
+### Parameters
+
+| Name    | Type   | Description                              |
+| ------- | ------ | ---------------------------------------- |
+| id      | Number | <p>Restaurants id.</p>                   |
+| name    | String | **optional** <p>Restaurants name</p>     |
+| address | String | **optional** <p>Restaurants address </p> |
+| city    | String | **optional** <p>Restaurants city </p>    |
+| state   | String | **optional** <p>Restaurants state</p>    |
+| zipCode | Number | **optional** <p>Restaurants zip code</p> |
+
+### Examples
+
+Request example:
+
+```
+const request = axios.create({
+    baseURL: 'http://localhost:4000',
+        headers: {
+            authorization: "userTokenGoesHere"
+        }
+});
+request.put('/restaurants/11');
+```
+
+### Success Response
+
+Update Success
+
+```
+
+ {
+    "id": 11
+}
+```
+
+### Error Response
+
+Error Example:
+
+```
+ERROR XXX
+{
+    "status": xxx,
+    "message": "Some Error Message"
+}
+```
+
 ## Delete restaurant
 
     Delete /restaurants/:id
+
+### Headers
+
+| Name          | Type   | Description             |
+| ------------- | ------ | ----------------------- |
+| authorization | String | <p>User auth token.</p> |
+
+### Parameters
+
+| Name | Type   | Description            |
+| ---- | ------ | ---------------------- |
+| id   | Number | <p>Restaurants id.</p> |
 
 ### Examples
 
