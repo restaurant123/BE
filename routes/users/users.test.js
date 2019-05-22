@@ -89,4 +89,28 @@ describe("server", () => {
         });
     });
   });
+
+  describe("Put /", () => {
+    it("should return 204 No Content, when deleting data", async () => {
+      let res = await request(server)
+        .put("/users/3")
+        .set("Authorization", `${token}`)
+        .send({
+          name: "Sammie Davis"
+        });
+
+      expect(res.status).toBe(200);
+    });
+
+    it("should return 404 if users does not exist", async () => {
+      let res = await request(server)
+        .put("/users/100")
+        .set("Authorization", `${token}`)
+        .send({
+          name: "Sammie Davis"
+        });
+
+      expect(res.status).toBe(404);
+    });
+  });
 });

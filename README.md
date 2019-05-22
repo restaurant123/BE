@@ -327,7 +327,7 @@ ERROR XXX
 
 | Name | Type   | Description              |
 | ---- | ------ | ------------------------ |
-| id   | Number | <p>Restaurants email</p> |
+| id   | Number | <p>Restaurants id</p> |
 
 ### Examples
 
