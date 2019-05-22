@@ -3,7 +3,7 @@ const db = require("./restaurants-models.js");
 const restricted = require("../../api/restricted");
 
 // Get all restaurants in the city --> /restaurants
-restaurantsRouter.get("/", restricted, async (req, res) => {
+restaurantsRouter.get("/", async (req, res) => {
   try {
     const user = await db.getRestaurant();
     res.status(200).json(user);
@@ -31,33 +31,8 @@ restaurantsRouter.get("/:id", async (req, res) => {
   }
 });
 
-/**
- * @api {delete} /restaurants/:id      Delete restaurant by id.
- * @apiVersion 1.0.0
- * @apiName DeleteRestaurant
- * @apiGroup Restaurants
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.get('/restaurants/1');
- *
- * @apiParam {Number} id    Restaurant id.
-
- * @apiUse Error
- *
- *
- *
- */
-
 // Delete request to delete restaurant --> /:id
-restaurantsRouter.delete("/:id", async (req, res) => {
+restaurantsRouter.delete("/:id", restricted, async (req, res) => {
   try {
     const restaurant = await db.removeRestaurant(req.params.id);
     restaurant > 0
