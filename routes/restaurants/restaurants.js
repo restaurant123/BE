@@ -49,4 +49,24 @@ restaurantsRouter.delete("/:id", restricted, async (req, res) => {
   }
 });
 
+// Put request to edit restaurant
+restaurantsRouter.put("/:id", restricted, async (req, res) => {
+  const restaurant = req.body;
+  try {
+    const { id } = req.params;
+    const editRestaurant = await db.updateRestaurant(id, restaurant);
+    editRestaurant
+      ? res.status(200).json({ id: editRestaurant.id })
+      : res.status(404).json({
+          message: "The restaurant with the specified ID does not exist."
+        });
+  } catch (error) {
+    // log error to database
+    console.log(error);
+    res.status(500).json({
+      message: "The restaurant information could not be modified."
+    });
+  }
+});
+
 module.exports = restaurantsRouter;

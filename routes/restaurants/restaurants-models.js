@@ -20,9 +20,23 @@ function removeRestaurant(id) {
     .del();
 }
 
+function updateRestaurant(id, changes) {
+  return db("restaurants")
+    .where({ id })
+    .update(changes)
+    .then(count => {
+      if (count > 0) {
+        return findRestaurantById(id);
+      } else {
+        return null;
+      }
+    });
+}
+
 module.exports = {
   findRestaurant,
   getRestaurant,
   findRestaurantById,
-  removeRestaurant
+  removeRestaurant,
+  updateRestaurant
 };
