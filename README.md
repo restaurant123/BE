@@ -2,7 +2,7 @@
 
 Api for Restaurant Passport. A web application for finding the best places to eat near you.
 
-- [Users](#users) - [Get a user with the id.](#get-a-user-with-the-id.) - [Get all active restaurants for a user.](#get-all-post-for-a-user.) - [Log a user in.](#log-a-user-in.) - [Register a new user.](#register-a-new-user.) - [Update user info.](#update-user-info.)
+- [Users](#users) - [Get a user with the id.](#get-a-user-with-the-id.) - [Get all active restaurants for a user.](#get-all-active-restaurants-for-a-user.) - [Log a user in.](#log-a-user-in.) - [Register a new user.](#register-a-new-user.) - [Update user info.](#update-user-info.)
 
 - [Restaurants](#restaurants) - [Get a restaurant by id.](#get-a-restaurant-by-id.) - [Get all restaurants.](#get-all-restaurants.) - [Delete restaurant.](#delete-restaurant.)
 
@@ -325,8 +325,8 @@ ERROR XXX
 
 ### Parameters
 
-| Name | Type   | Description              |
-| ---- | ------ | ------------------------ |
+| Name | Type   | Description           |
+| ---- | ------ | --------------------- |
 | id   | Number | <p>Restaurants id</p> |
 
 ### Examples

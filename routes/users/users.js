@@ -16,7 +16,6 @@ usersRouter.get("/", async (req, res) => {
   }
 });
 
-
 // Get users with restaurants --> /users/:id
 usersRouter.get("/:id", restricted, async (req, res) => {
   const { id } = req.params;
@@ -31,7 +30,6 @@ usersRouter.get("/:id", restricted, async (req, res) => {
     console.log(error);
   }
 });
-
 
 // Register for new users  --> /users/register
 usersRouter.post("/register", (req, res) => {
@@ -115,42 +113,6 @@ usersRouter.post("/login", (req, res) => {
       });
     });
 });
-
-/**
- * @api {put} /users/:id       Edit User
- * @apiVersion 1.0.0
- * @apiName EditUser
- * @apiGroup Users
- *
- * @apiHeader {String} authorization  User auth token.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'http://localhost:4000',
-        headers: {
-            authorization: "userTokenGoesHere"
-        }
- * });
- * request.put('/users/:id');
- *
- *  @apiParam {String} name     First and Last Name.
- *  @apiParam {String} [email]      Email Address.
- *  @apiParam {String} password     password.
- *  @apiParam {String} [address]      password.
- *  @apiParam {String} [city]     city name, default Manhattan.
- *  @apiParam {String} [state]     state name, default New York.
- *  @apiParam {Number} [zipCode]      zipCode.
-
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-  "id": 1
-}
- *
- */
 
 // Put request to edit user --> /:id
 usersRouter.put("/:id", restricted, async (req, res) => {
