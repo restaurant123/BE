@@ -7,7 +7,11 @@ exports.up = function(knex) {
       .notNullable();
     tbl.text("address").notNullable();
     tbl.text("image_url");
+    tbl.text("summary");
+    tbl.text("takeout").defaultTo("yes");
+    tbl.text("delivery").defaultTo("no")
     tbl.text("description");
+    tbl.text("businesshours");
     tbl.text("city").notNullable();
     tbl.text("state").notNullable();
     tbl.integer("zipCode").notNullable();

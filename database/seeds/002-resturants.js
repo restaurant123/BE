@@ -11,7 +11,9 @@ const getRestaurants = () => {
       name: faker.company.companyName(),
       address: faker.address.streetAddress(),
       image_url: image, 
+      summary: faker.lorem.sentence(),
       description: faker.lorem.paragraph(),
+      businesshours: "Mon-Sun: 10 am - 11 pm",
       city: "Manhattan",
       state: "New York",
       zipCode: 14025
