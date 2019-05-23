@@ -6,11 +6,11 @@ exports.up = function(knex) {
       .unique()
       .notNullable();
     tbl.text("address").notNullable();
-    tbl.text("image_url");
+    tbl.text("image_url").notNullable();
     tbl.text("summary");
     tbl.text("takeout").defaultTo("yes");
     tbl.text("delivery").defaultTo("no")
-    tbl.text("description");
+    tbl.text("description").notNullable();
     tbl.text("openDay");
     tbl.text("closeDay");
     tbl.integer("openHour").defaultTo(10)

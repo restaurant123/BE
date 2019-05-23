@@ -31,6 +31,46 @@ restaurantsRouter.get("/:id", async (req, res) => {
   }
 });
 
+// Post request to add new restaurant --> /restaraurants 
+restaurantsRouter.post("/", restricted, (req, res) => {
+  const restaurant = req.body;
+  if (
+    !restaurant ||
+    !restaurant.name ||
+    !restaurant.description ||
+    !restaurant.address ||
+    !restaurant.city ||
+    !restaurant.state ||
+    !restaurant.zipCode
+  ) {
+    return res.status(400).json({
+      message: "Please fill out all the information needed for added restaurant.",
+      status: 400
+    });
+  }
+  db.addRestaurant(restaurant)
+    .then(restaurant => {
+      if (restaurant) {
+        res.status(201).json({ restaurant });
+      } else {
+        throw { message: "Something went wrong", status: 500 };
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      if (err.message.includes("restaurant.name")) {
+        return res.status(400).json({
+          message:
+            "Restaurant with that name already exists",
+          status: 400
+        });
+      }
+      res
+        .status(err.status || 500)
+        .json({ message: err.message, status: err.status || 500 });
+    });
+});
+
 // Delete request to delete restaurant --> /:id
 restaurantsRouter.delete("/:id", restricted, async (req, res) => {
   try {
