@@ -13,8 +13,8 @@ exports.up = function(knex) {
     tbl.text("description");
     tbl.text("openDay");
     tbl.text("closeDay");
-    tbl.integer("openHours").defaultTo(10)
-    tbl.integer("closeHours").defaultTo(11)
+    tbl.integer("openHour").defaultTo(10)
+    tbl.integer("closeHour").defaultTo(11)
     tbl.text("city").notNullable();
     tbl.text("state").notNullable();
     tbl.integer("zipCode").notNullable();
