@@ -21,6 +21,14 @@ beforeAll(done => {
 
 describe("server", () => {
   describe("GET / request ", () => {
+    it("we have token", () => {
+      return request(server)
+        .get("/users/1")
+        .set("Authorization", `${token}`)
+        .then(res => {
+          expect(token).toBe(token);
+        });
+    });
     it("should return 200 that able to get data", () => {
       return request(server)
         .get("/users")
@@ -29,7 +37,7 @@ describe("server", () => {
 
     it("get user by id", () => {
       return request(server)
-        .get("/users/1")
+        .get("/users/5")
         .set("Authorization", `${token}`)
         .then(res => {
           expect(res.status).toBe(200);
@@ -80,7 +88,7 @@ describe("server", () => {
       return request(server)
         .post("/users/login")
         .send({
-          email: "sam_doe@gmail.com",
+          email: "john_doe@gmail.com",
           password: "password"
         })
         .set("Authorization", `${token}`)

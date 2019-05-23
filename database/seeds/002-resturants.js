@@ -2,13 +2,15 @@ const faker = require("faker");
 
 const getRestaurants = () => {
   let restaurants = [];
-  let amountOfRestaurants = 45;
+  let amountOfRestaurants = 30;
   for (let i = 0; i < amountOfRestaurants; i++) {
-    let image = `http://lorempixel.com/640/${i + 400}/food/`;
+    // let image = `https://lorempixel.com/1000/${i+ 970}/food/`;
+    let image =`https://source.unsplash.com/900x9${i+50}/?food`
+
     let restaurant = {
       name: faker.company.companyName(),
       address: faker.address.streetAddress(),
-      image_url: image,
+      image_url: image, 
       description: faker.lorem.paragraph(),
       city: "Manhattan",
       state: "New York",
