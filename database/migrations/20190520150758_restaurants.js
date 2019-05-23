@@ -7,14 +7,18 @@ exports.up = function(knex) {
       .notNullable();
     tbl.text("address").notNullable();
     tbl.text("image_url").notNullable();
-    tbl.text("summary");
+    tbl
+      .text("summary")
+      .defaultTo(
+        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos."
+      );
     tbl.text("takeout").defaultTo("yes");
-    tbl.text("delivery").defaultTo("no")
+    tbl.text("delivery").defaultTo("no");
     tbl.text("description").notNullable();
-    tbl.text("openDay");
-    tbl.text("closeDay");
-    tbl.integer("openHour").defaultTo(10)
-    tbl.integer("closeHour").defaultTo(11)
+    tbl.text("openDay").defaultTo("Monday");
+    tbl.text("closeDay").defaultTo("Sunday");
+    tbl.integer("openHour").defaultTo(10);
+    tbl.integer("closeHour").defaultTo(11);
     tbl.text("city").notNullable();
     tbl.text("state").notNullable();
     tbl.integer("zipCode").notNullable();
