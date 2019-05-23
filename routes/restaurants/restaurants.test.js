@@ -18,6 +18,44 @@ beforeAll(done => {
 });
 
 describe("restaurant router tests", () => {
+  describe("POST /restaurants request ", () => {
+    it("should return 201 when new restaurant added", () => {
+      return request(server)
+        .post("/restaurants")
+        .send({
+          name: "The Place Restaurant",
+	address: "1234 Street",
+    city: "Manhattan",
+    state: "New York",
+    zipCode: 14025,
+	description: "This is one of the cities best places to go! If you havent been you are missing out.",
+	image_url: "https://source.unsplash.com/900x990/?dinner"
+        })
+        .set("Authorization", `${token}`)
+        .then(res => {
+          expect(res.status).toBe(201);
+        });
+    });
+  })
+
+  it("should return 400 if restaurant name exsists", () => {
+    return request(server)
+      .post("/restaurants")
+      .send({
+        name: "The Place Restaurant",
+address: "1234 Street",
+  city: "Manhattan",
+  state: "New York",
+  zipCode: 14025,
+description: "This is one of the cities best places to go! If you havent been you are missing out.",
+image_url: "https://source.unsplash.com/900x990/?dinner"
+      })
+      .set("Authorization", `${token}`)
+      .then(res => {
+        expect(res.status).toBe(400);
+      });
+  });
+})
   describe("GET /restaurants request ", () => {
     it("should return 200 that able to get data", () => {
       return request(server)

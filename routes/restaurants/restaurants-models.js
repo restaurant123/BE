@@ -14,6 +14,11 @@ function findRestaurantById(id) {
     .first();
 }
 
+async function addRestaurant(restaurant) {
+  const [id] = await db("restaurants").insert(restaurant, "id");
+
+  return findRestaurantById(id);
+}
 function removeRestaurant(id) {
   return db("restaurants")
     .where({ id })
@@ -38,5 +43,6 @@ module.exports = {
   getRestaurant,
   findRestaurantById,
   removeRestaurant,
-  updateRestaurant
+  updateRestaurant,
+  addRestaurant
 };
