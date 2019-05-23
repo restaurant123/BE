@@ -16,8 +16,8 @@ const getRestaurants = () => {
       description: faker.lorem.paragraph(),
       openDay: faker.date.weekday(),
       closeDay: faker.date.weekday(),
-      openHours: num1,
-      closeHours: num2,
+      openHour: num1,
+      closeHour: num2,
       city: "Manhattan",
       state: "New York",
       zipCode: 14025
